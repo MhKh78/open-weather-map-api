@@ -6,14 +6,14 @@ services:
     container_name: node_app
     restart: always
     ports:
-      - "4000:4000"
+      - "8010:8010"
     environment:
-      - PORT=4000
+      - PORT=8010
       - DB_HOST=db
       - DB_PORT=5432
-      - DB_USER=postgres
-      - DB_PASS=postgres
-      - DB_NAME=mydb
+      - DB_USER=
+      - DB_PASS=
+      - DB_NAME=
     depends_on:
       - db
     volumes:
@@ -26,9 +26,9 @@ services:
     container_name: pg_db
     restart: always
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: mydb
+      POSTGRES_USER: 
+      POSTGRES_PASSWORD: 
+      POSTGRES_DB: 
     ports:
       - "5432:5432"
     volumes:
