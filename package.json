@@ -5,10 +5,10 @@
   "main": "index.ts",
   "scripts": {
     "predev": "npm run migration:run",
-    "dev": "ts-node src/index.ts",
-    "build": "tsc",
+    "dev": "ts-node -r tsconfig-paths/register src/index.ts",
+    "build": "tsc --project tsconfig.json && tsc-alias -p tsconfig.json",
     "prestart": "npm run migration:run",
-    "start": "node build/index.js",
+    "start": "node dist/index.js",
     "typeorm": "typeorm-ts-node-commonjs",
     "migration:generate": "typeorm-ts-node-commonjs  migration:generate -d src/data-source.ts",
     "migration:run": "typeorm-ts-node-commonjs migration:run -d src/data-source.ts"
@@ -29,18 +29,22 @@
   },
   "homepage": "https://github.com/MhKh78/open-weather-map-api#readme",
   "dependencies": {
+    "axios": "^1.11.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.2",
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "pg": "^8.14.1",
-    "reflect-metadata": "^0.2.2",
     "typeorm": "0.3.25"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
     "@types/node": "^24.1.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.2",
-    "@types/cors": "^2.8.19",
-    "@types/express": "^5.0.3"
+    "tsc-alias": "^1.8.16",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.9.2"
   }
 }
