@@ -4,7 +4,14 @@
   "description": "Open Weatcher Map Api Integration Service",
   "main": "index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "predev": "npm run migration:run",
+    "dev": "ts-node src/index.ts",
+    "build": "tsc",
+    "prestart": "npm run migration:run",
+    "start": "node build/index.js",
+    "typeorm": "typeorm-ts-node-commonjs",
+    "migration:generate": "typeorm-ts-node-commonjs  migration:generate -d src/data-source.ts",
+    "migration:run": "typeorm-ts-node-commonjs migration:run -d src/data-source.ts"
   },
   "repository": {
     "type": "git",
@@ -20,5 +27,20 @@
   "bugs": {
     "url": "https://github.com/MhKh78/open-weather-map-api/issues"
   },
-  "homepage": "https://github.com/MhKh78/open-weather-map-api#readme"
+  "homepage": "https://github.com/MhKh78/open-weather-map-api#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "pg": "^8.14.1",
+    "reflect-metadata": "^0.2.2",
+    "typeorm": "0.3.25"
+  },
+  "devDependencies": {
+    "@types/node": "^24.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3"
+  }
 }
