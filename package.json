@@ -1,0 +1,24 @@
+{
+  "name": "open-weather-map-api",
+  "version": "1.0.0",
+  "description": "Open Weatcher Map Api Integration Service",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MhKh78/open-weather-map-api.git"
+  },
+  "keywords": [
+    "weatcher-api",
+    "open-source",
+    "integration"
+  ],
+  "author": "MhKh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MhKh78/open-weather-map-api/issues"
+  },
+  "homepage": "https://github.com/MhKh78/open-weather-map-api#readme"
+}
