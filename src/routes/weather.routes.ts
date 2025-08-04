@@ -2,7 +2,7 @@
 import { Router, Request } from "express";
 import { WeatherController } from "../modules/weather/weather.controller";
 import { validateDto } from "@middlewares/validate-dto.middleware";
-import { jwtGuard } from "@middlewares/auth.middleware";
+import { jwtGuard } from "@modules/auth/auth.guard";
 import { CreateWeatherDto } from "@modules/weather/dto/create-weather.dto";
 import { getWeatherByIdDto } from "@modules/weather/dto/get-weather.dto";
 import { cacheRequest } from "@middlewares/cache.middleware";
