@@ -9,11 +9,11 @@ services:
       - "8010:8010"
     environment:
       - PORT=8010
-      - DB_HOST=db
+      - PGHOST=db
       - DB_PORT=5432
-      - DB_USER=
-      - DB_PASS=
-      - DB_NAME=
+      - PGUSER=
+      - PGPASSWORD=
+      - PGDATABASE=
     depends_on:
       - db
     volumes:
