@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { WeatherService } from "./weather.service";
-import { WeatherInput } from "./weather.types";
+import { WeatherCreationInput } from "./weather.types";
 import { ResponseBuilder } from "@utils/response-builder";
 
 export class WeatherController {
@@ -8,10 +8,20 @@ export class WeatherController {
 
   create = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const created = await this.service.create(req.body);
-      res
-        .status(201)
-        .json(ResponseBuilder.created("Weather entry created", created));
+      const exists = await this.service.getByCityAndCountry(req.body);
+      if (exists) {
+        res
+          .status(201)
+          .json(ResponseBuilder.success("Weather entry found", exists));
+      } else {
+        const created = await this.service.create({
+          ...req.body,
+          createdBy: req.user,
+        });
+        res
+          .status(201)
+          .json(ResponseBuilder.created("Weather entry created", created));
+      }
     } catch (err) {
       next(err);
     }

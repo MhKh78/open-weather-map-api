@@ -5,9 +5,15 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
+  Unique,
 } from "typeorm";
+import { User } from "./user.entity";
 
 @Entity()
+@Unique(["cityName", "country"])
+@Unique(["lat", "lon"])
 export class Weather {
   @PrimaryGeneratedColumn("uuid")
   id!: string;
@@ -23,6 +29,10 @@ export class Weather {
 
   @Column("float")
   lon!: number;
+
+  @ManyToOne(() => User, (user) => user.id, { nullable: false })
+  @JoinColumn({ name: "created_by" })
+  createdBy!: User;
 
   @Column("float")
   temperature?: number;

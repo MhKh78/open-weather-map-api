@@ -1,7 +1,7 @@
 // src/modules/weather/weather.service.ts
 import AppDataSource from "@db/data-source";
 import { Weather } from "@db/entities/weather.entity";
-import { WeatherInput } from "./weather.types";
+import { WeatherCreationInput, WeatherInput } from "./weather.types";
 import { OpenWeatherMapService } from "@modules/shared/open-weather-map/open-weather-map-api";
 import { config } from "@root/config";
 
@@ -9,9 +9,9 @@ export class WeatherService {
   private weatherAPI = new OpenWeatherMapService(config.openWeatherApiKey); // API key loaded via env
   private repo = AppDataSource.getRepository(Weather);
 
-  async create(data: WeatherInput): Promise<Weather> {
+  async create(data: WeatherCreationInput): Promise<Weather> {
     const weather = await this.weatherAPI.fetchByCity(
-      data.city_name,
+      data.cityName,
       data.country
     );
 
@@ -43,5 +43,15 @@ export class WeatherService {
         totalPages: Math.ceil(total / limit),
       },
     };
+  }
+
+  async getByCityAndCountry(data: WeatherInput): Promise<Weather | null> {
+    return await this.repo.findOne({
+      where: {
+        cityName: data.cityName,
+        country: data.country,
+      },
+      order: { fetchedAt: "DESC" }, // optional: if multiple entries exist, get the latest
+    });
   }
 }
