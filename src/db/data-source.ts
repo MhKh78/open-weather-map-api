@@ -14,8 +14,8 @@ export default new DataSource({
   username: config.db.user,
   password: config.db.password,
   database: config.db.database,
-  // synchronize: true,
-  synchronize: false,
+  synchronize: true,
+  // synchronize: false,
   logging: ["query", "error"],
   entities: [Weather, User],
   migrations: [__dirname + "/migrations/*.ts"], // <-- key line
@@ -23,7 +23,7 @@ export default new DataSource({
 
   extra: {
     // Specifying Pool Size
-    // poolSize: 50,
+    // poolSize: 50,/*  */
     max: 50,
   },
 
