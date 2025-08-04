@@ -5,8 +5,6 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "outDir": "./dist",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
     "sourceMap": true,
     "baseUrl": "./src",
     "paths": {
@@ -14,8 +12,12 @@
       "@modules/*": ["modules/*"],
       "@middlewares/*": ["middlewares/*"],
       "@utils/*": ["utils/*"],
-      "@config/*": ["config/*"]
-    }
+      "@config/*": ["config/*"],
+      "@root/*": ["*"]
+    },
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "strict": true
   },
-  "include": ["app.d.ts", "src/**/*"]
+  "include": ["index.d.ts", "src/**/*", "src/types/**/*.d.ts"]
 }
