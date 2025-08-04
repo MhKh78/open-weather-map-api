@@ -33,6 +33,7 @@ export function globalErrorHandler(
     return res.status(err.statusCode).json({
       status: "error",
       message: err.message,
+      statsuCode: err.statusCode,
       ...((err.details as any) && { details: err.details }),
     });
   }
