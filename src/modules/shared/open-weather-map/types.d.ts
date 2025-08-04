@@ -1,4 +1,6 @@
 export interface WeatherApiResult {
+  cityName: string;
+  country: string;
   lat: number;
   lon: number;
   temperature: number;

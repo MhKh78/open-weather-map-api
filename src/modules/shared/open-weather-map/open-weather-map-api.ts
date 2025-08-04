@@ -1,5 +1,6 @@
 import axios from "axios";
 import { WeatherApiResult } from "./types";
+import { ApiError } from "@utils/api-error";
 
 export class OpenWeatherMapService {
   private readonly apiKey: string;
@@ -25,6 +26,8 @@ export class OpenWeatherMapService {
       const data = response.data;
 
       return {
+        country: data?.sys?.country || country,
+        cityName: data.name || city,
         lat: data.coord.lat,
         lon: data.coord.lon,
         temperature: data.main.temp,
@@ -36,7 +39,10 @@ export class OpenWeatherMapService {
     } catch (error: any) {
       const message =
         error.response?.data?.message || "Weather API fetch failed";
-      throw new Error(`OpenWeatherMap error: ${message}`);
+      throw new ApiError(
+        `OpenWeatherMapApi error: ${message}`,
+        error.response?.status || 500
+      );
     }
   }
 }
