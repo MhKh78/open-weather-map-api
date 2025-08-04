@@ -11,13 +11,19 @@ const envSchema = Joi.object({
 
   HOST: Joi.string().default("localhost"),
   PORT: Joi.number().default(8010),
+
+  // Postgres Setup
   PGHOST: Joi.string().required(),
-  DB_PORT: Joi.number().default(5432),
+  PGPORT: Joi.number().default(5432),
   PGUSER: Joi.string().required(),
   PGPASSWORD: Joi.string().required(),
   PGDATABASE: Joi.string().required(),
+
+  // Redis Setup
   REDIS_URL: Joi.string().required(),
+
   OPEN_WEATHER_MAP_API_KEY: Joi.string().required(),
+
   JWT_SECRET: Joi.string().required(),
 }).unknown(true); // allow extra vars like PATH, etc.
 
@@ -38,11 +44,11 @@ export const config = {
   nodeEnv: envVars.NODE_ENV,
 
   db: {
-    host: envVars.DB_HOST,
-    port: envVars.DB_PORT,
-    user: envVars.DB_USER,
-    password: envVars.DB_PASS,
-    database: envVars.DB_NAME,
+    host: envVars.PGHOST,
+    port: envVars.PGPORT,
+    user: envVars.PGUSER,
+    password: envVars.PGPASSWORD,
+    database: envVars.PGDATABASE,
   },
 
   redis: {
