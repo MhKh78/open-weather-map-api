@@ -4,9 +4,10 @@ import AppDataSource from "@db/data-source";
 import { User } from "@db/entities/user.entity";
 import { generateJwt } from "@utils/jwt";
 import { ApiError } from "@utils/api-error";
+import { UserRepository } from "@db/repositories/user.repository";
 
 export class AuthService {
-  private userRepo = AppDataSource.getRepository(User);
+  private userRepo = UserRepository(AppDataSource);
 
   async register(username: string, password: string) {
     const existing = await this.userRepo.findOne({ where: { username } });

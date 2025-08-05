@@ -1,39 +1,43 @@
-// src/entity/Weather.ts
+// src/db/entities/forecast.entity.ts
 import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  CreateDateColumn,
-  UpdateDateColumn,
   ManyToOne,
   JoinColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
   Unique,
 } from "typeorm";
 import { City } from "./city.entity";
 
 @Entity()
-export class Weather {
+@Unique(["city", "forecastDate"])
+export class Forecast {
   @PrimaryGeneratedColumn("uuid")
   id!: string;
 
-  @ManyToOne(() => City, (city) => city.weatherRecords, { nullable: false })
+  @ManyToOne(() => City, (city) => city.forecasts, { nullable: false })
   @JoinColumn({ name: "city_id" })
   city!: City;
 
+  @Column({ type: "date" })
+  forecastDate!: string; // ISO date (YYYY-MM-DD)
+
   @Column("float")
-  temperature?: number;
+  temperatureMin!: number;
+
+  @Column("float")
+  temperatureMax!: number;
 
   @Column()
-  description?: string;
+  description!: string;
 
   @Column("int")
-  humidity?: number;
+  humidity!: number;
 
   @Column("float")
-  windSpeed?: number;
-
-  @Column({ type: "timestamp" })
-  fetchedAt!: Date;
+  windSpeed!: number;
 
   @CreateDateColumn()
   createdAt!: Date;
@@ -42,5 +46,5 @@ export class Weather {
   updatedAt!: Date;
 
   @Column({ type: "timestamp", nullable: true })
-  deletedAt?: Date | null;
+  deletedAt?: Date;
 }
