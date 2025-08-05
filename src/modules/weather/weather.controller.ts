@@ -78,7 +78,7 @@ export class WeatherController {
       if (latest?.meta.updated) req.invalidate_cache = true;
 
       if (!latest) {
-        return new ApiError("No weather data found for city", 404);
+        throw new ApiError("No weather data found for city", 404);
       }
       res.json(ResponseBuilder.success("Latest weather retrieved", latest));
     } catch (err) {
@@ -91,7 +91,7 @@ export class WeatherController {
       const { id } = req.params;
       const result = await this.service.softDelete(id);
       if (!result) {
-        return new ApiError("Weather record not found", 404);
+        throw new ApiError("Weather record not found", 404);
       }
       req.invalidate_cache = true;
 

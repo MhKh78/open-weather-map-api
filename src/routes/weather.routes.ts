@@ -148,7 +148,10 @@ router.get(
 router.get(
   "/latest/:cityName",
   validateDto(getWeatherByCityDto, "params"),
-  cacheRequest((req: Request) => `${baseCacheKey}:city:${req.params.id}`, 300),
+  cacheRequest(
+    (req: Request) => `${baseCacheKey}:city:${req.params.cityName}`,
+    300
+  ),
   controller.getLatestByCity
 );
 

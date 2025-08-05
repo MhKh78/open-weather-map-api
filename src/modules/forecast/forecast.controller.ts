@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { ForecastService } from "./forecast.service";
 import { ResponseBuilder } from "@utils/response-builder";
+import { ApiError } from "@utils/api-error";
 
 export class ForecastController {
   public static baseCacheKey = "forecast";
@@ -40,10 +41,8 @@ export class ForecastController {
       const cityName = req.params.cityName;
       const forecasts = await this.service.getOrFetch(cityName);
 
-      if (!forecasts) {
-        return res
-          .status(404)
-          .json(ResponseBuilder.notFound("City or forecast not found"));
+      if (!forecasts || !forecasts.length) {
+        throw new ApiError("City or forecast not found", 404);
       }
 
       res.json(ResponseBuilder.success("Forecast retrieved", forecasts));
