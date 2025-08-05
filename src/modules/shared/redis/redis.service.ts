@@ -82,10 +82,27 @@ export class RedisService {
     if (!this.isConnected()) return;
 
     const pattern = `${baseKey}:*`;
-    const keys = await this.client.keys(pattern);
+    let cursor = 0;
+    const keysToDelete: string[] = [];
 
-    if (keys.length > 0) {
-      await this.client.del(...(keys as any));
+    do {
+      const { cursor: nextCursor, keys } = await this.client.scan(cursor, {
+        MATCH: pattern,
+        COUNT: 100,
+      });
+      cursor = nextCursor;
+      keysToDelete.push(...keys);
+    } while (cursor !== 0);
+
+    if (keysToDelete.length > 0) {
+      const multi = this.client.multi();
+      keysToDelete.forEach((key) => multi.del(key));
+      await multi.exec();
+      console.log(
+        `🧹 Deleted ${keysToDelete.length} keys with pattern "${pattern}"`
+      );
+    } else {
+      console.log(`ℹ️ No keys found with pattern "${pattern}"`);
     }
   }
 }

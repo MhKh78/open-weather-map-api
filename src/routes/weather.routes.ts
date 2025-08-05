@@ -7,6 +7,7 @@ import { getWeatherByIdDto } from "@modules/weather/dto/get-weather.dto";
 import { cacheRequest } from "@middlewares/cache.middleware";
 import { UpdateWeatherDto } from "@modules/weather/dto/update-weather.dto";
 import { invalidateCacheMiddleware } from "@middlewares/invalidate-cache.middleware";
+import { getWeatherByCityDto } from "@modules/weather/dto/get-weather-city.dto";
 
 /**
  * @swagger
@@ -117,7 +118,7 @@ router.get("/", cacheRequest(cacheKey, 600), controller.getAll);
 router.get(
   "/:id",
   validateDto(getWeatherByIdDto, "params"),
-  cacheRequest((req: Request) => `weather:id:${req.params.id}`, 300),
+  cacheRequest((req: Request) => `${baseCacheKey}:id:${req.params.id}`, 300),
   controller.getById
 );
 
@@ -144,7 +145,12 @@ router.get(
  *       404:
  *         description: No weather data found for city
  */
-router.get("/latest/:cityName", controller.getLatestByCity);
+router.get(
+  "/latest/:cityName",
+  validateDto(getWeatherByCityDto, "params"),
+  cacheRequest((req: Request) => `${baseCacheKey}:city:${req.params.id}`, 300),
+  controller.getLatestByCity
+);
 
 /**
  * @swagger
