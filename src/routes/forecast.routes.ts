@@ -2,7 +2,9 @@ import { cacheRequest } from "@middlewares/cache.middleware";
 import { invalidateCacheMiddleware } from "@middlewares/invalidate-cache.middleware";
 import { validateDto } from "@middlewares/validate-dto.middleware";
 import { getForecastByIdDto } from "@modules/forecast/dto/get-forecast.dto";
+import { getForecastByCityDto } from "@modules/forecast/dto/get-weather-city.dto";
 import { ForecastController } from "@modules/forecast/forecast.controller";
+import { getWeatherByCityDto } from "@modules/weather/dto/get-weather-city.dto";
 import { Router, Request } from "express";
 
 const router = Router();
@@ -36,7 +38,15 @@ router.use(invalidateCacheMiddleware(baseCacheKey));
  *       404:
  *         description: Not found
  */
-router.get("/5day/:cityName", controller.getForecast);
+router.get(
+  "/5day/:cityName",
+  validateDto(getForecastByCityDto, "params"),
+  cacheRequest(
+    (req: Request) => `${baseCacheKey}:city:${req.params.cityName}`,
+    300
+  ),
+  controller.getForecast
+);
 
 /**
  * @swagger
@@ -86,7 +96,7 @@ router.get("/", cacheRequest(cacheKey, 600), controller.getAll);
 router.get(
   "/:id",
   validateDto(getForecastByIdDto, "params"),
-  cacheRequest((req: Request) => `forecast:id:${req.params.id}`, 300),
+  cacheRequest((req: Request) => `${baseCacheKey}:id:${req.params.id}`, 300),
   controller.getById
 );
 

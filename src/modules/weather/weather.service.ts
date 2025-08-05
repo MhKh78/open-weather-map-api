@@ -21,7 +21,7 @@ export class WeatherService {
     if (!city) throw new Error("City could not be created");
 
     const latest = await this.weatherRepo.findOne({
-      where: { city },
+      where: { city: { id: city.id } },
       order: { fetchedAt: "DESC" },
       relations: ["city"],
     });
@@ -54,7 +54,7 @@ export class WeatherService {
     if (!city) return null;
 
     const latest = await this.weatherRepo.findOne({
-      where: { city },
+      where: { city: { id: city.id }, deletedAt: IsNull() },
       order: { fetchedAt: "DESC" },
       relations: ["city"],
     });
@@ -125,7 +125,10 @@ export class WeatherService {
   }
 
   async softDelete(id: string): Promise<boolean> {
-    const result = await this.weatherRepo.update(id, { deletedAt: new Date() });
+    const result = await this.weatherRepo.update(
+      { id, deletedAt: IsNull() },
+      { deletedAt: new Date() }
+    );
     return result.affected !== undefined && result.affected > 0;
   }
 

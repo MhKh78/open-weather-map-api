@@ -7,6 +7,7 @@ import { Forecast } from "@db/entities/forecast.entity";
 import { ForecastRepository } from "@db/repositories/forecast.repository";
 import { OpenWeatherMapService } from "@modules/shared/open-weather-map/open-weather-map-api";
 import { DateTime } from "luxon";
+import { ApiError } from "@utils/api-error";
 
 const fromDate = DateTime.now().toISODate(); // e.g., '2025-08-05'
 const toDate = DateTime.now().plus({ days: 4 }).toISODate();
@@ -53,8 +54,8 @@ export class ForecastService {
   async getOrFetch(cityName: string): Promise<Forecast[] | null> {
     const city = await this.cityRepo.findOne({
       where: { cityName },
-      relations: ["city"],
     });
+
     if (!city) return null;
 
     const fromDate = DateTime.now().toISODate();
@@ -62,7 +63,7 @@ export class ForecastService {
 
     const existing = await this.forecastRepo.find({
       where: {
-        city,
+        city: { id: city.id },
         forecastDate: Between(fromDate, toDate),
       },
       relations: ["city"],
@@ -81,12 +82,15 @@ export class ForecastService {
       })
     );
 
-    await this.forecastRepo.upsert(entities, ["city", "forecastDate"]);
+    const res = await this.forecastRepo.upsert(entities, [
+      "city",
+      "forecastDate",
+    ]);
 
     // Re-fetch with correct fromDate/toDate
     return await this.forecastRepo.find({
       where: {
-        city,
+        city: { id: city.id },
         forecastDate: Between(fromDate, toDate),
       },
       relations: ["city"],
