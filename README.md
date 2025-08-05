@@ -63,18 +63,17 @@ src/
 ```env
 HOST=localhost
 PORT=8010
-NODE_ENV=development
 
-REDIS_URL=redis://default:@localhost:6379
+PGHOST=localhost
+PGPORT=5432
+PGUSER=
+PGPASSWORD=
+PGDATABASE=open-weather-app-api-db
 
-DB_HOST=localhost
-DB_PORT=5432
-DB_USER=your_user
-DB_PASS=your_password
-DB_NAME=your_db
+REDIS_URL=redis://default:@127.0.0.1:6379
 
+OPEN_WEATHER_MAP_API_KEY=your_openweather_api_key
 JWT_SECRET=your_jwt_secret
-OPENWEATHER_API_KEY=your_openweather_api_key
 ```
 
 ## 🔧 Installation
