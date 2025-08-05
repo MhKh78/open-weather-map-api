@@ -1,0 +1,24 @@
+# Node dependencies
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Build artifacts
+dist
+build
+*.tsbuildinfo
+
+# Local environment files
+.env
+.env.local
+.env.*.local
+
+# OS + IDE
+.DS_Store
+.vscode
+.idea
+*.swp
+
+# Docker files
+docker-compose.override.yml
+docker-compose.dev.yml

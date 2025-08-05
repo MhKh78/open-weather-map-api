@@ -2,7 +2,9 @@
 import * as dotenv from "dotenv";
 import * as Joi from "joi";
 
-dotenv.config();
+if (process.env.NODE_ENV !== "production") {
+  dotenv.config();
+}
 
 const envSchema = Joi.object({
   NODE_ENV: Joi.string()
