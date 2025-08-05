@@ -43,6 +43,7 @@ async function bootstrap() {
 
     app.listen(PORT, () => {
       console.log(`🚀 Server running on http://${config.host}:${PORT}`);
+      console.log(`🚀 Check Docs on http://${config.host}:${PORT}/api-docs`);
     });
   } catch (err) {
     console.error("❌ Server initialization failed:", err);
