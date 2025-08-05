@@ -15,8 +15,11 @@ import { Weather } from "./weather.entity";
 import { Forecast } from "./forecast.entity";
 
 @Entity()
-@Unique(["cityName", "country"])
-@Unique(["lat", "lon"])
+/** On Some Unique Case:
+ * New York and New York County Becaus Of Resoloution lat and lon are duplicated
+ * The Most Unique Key Is Combination Of For Columns
+ */
+@Unique(["cityName", "country", "lat", "lon"])
 export class City {
   @PrimaryGeneratedColumn("uuid")
   id!: string;
