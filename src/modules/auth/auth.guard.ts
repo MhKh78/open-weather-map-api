@@ -5,13 +5,14 @@ import { Request, Response, NextFunction } from "express";
 import * as jwt from "jsonwebtoken";
 import AppDataSource from "@db/data-source";
 import { User } from "@db/entities/user.entity";
+import { UserRepository } from "@db/repositories/user.repository";
 
 export async function jwtGuard(
   req: Request,
   res: Response,
   next: NextFunction
 ) {
-  const userRepo = AppDataSource.getRepository(User);
+  const userRepo = UserRepository(AppDataSource);
   const authHeader = req.headers.authorization;
 
   if (!authHeader?.startsWith("Bearer ")) {
