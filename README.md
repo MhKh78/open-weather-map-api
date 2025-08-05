@@ -2,7 +2,7 @@
 
 # 🌦️ Weather API (Node.js + TypeORM + TypeScript + Express)
 
-A modular, class-based REST API built with TypeScript, Express, TypeORM, PostgreSQL, JWT authentication, and Swagger documentation — deployed via Heroku.
+A modular, class-based REST API built with TypeScript, Express, TypeORM, PostgreSQL, JWT authentication, and Swagger documentation — deployable with Docker and Docker Compose.
 
 ---
 
@@ -31,7 +31,7 @@ A modular, class-based REST API built with TypeScript, Express, TypeORM, Postgre
 - 📦 Modular architecture (services, controllers, routes)
 - 🌱 TypeORM with PostgreSQL + migration support
 - 🧠 Uses `tsconfig-paths` for clean import aliases
-- ☁️ Heroku-ready for deployment
+- ☁️ Docker-ready for deployment
 
 ---
 
