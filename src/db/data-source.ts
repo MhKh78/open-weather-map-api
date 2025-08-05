@@ -4,8 +4,12 @@ import { Weather } from "./entities/weather.entity";
 import * as dotenv from "dotenv";
 import { User } from "./entities/user.entity";
 import { config } from "@root/config";
+import { City } from "./entities/city.entity";
+import { Forecast } from "./entities/forecast.entity";
 
-dotenv.config();
+if (process.env.NODE_ENV !== "production") {
+  dotenv.config();
+}
 
 export default new DataSource({
   type: "postgres",
@@ -17,7 +21,7 @@ export default new DataSource({
   synchronize: true,
   // synchronize: false,
   logging: ["query", "error"],
-  entities: [Weather, User],
+  entities: [Weather, User, City, Forecast],
   migrations: [__dirname + "/migrations/*.ts"], // <-- key line
   subscribers: [],
 
