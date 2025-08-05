@@ -24,7 +24,7 @@ services:
       - redis
     volumes:
       - /app/node_modules
-    command: sh -c "npm run start"
+    # command: sh -c "npm run start"
 
   db:
     image: postgres:15
