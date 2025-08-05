@@ -9,6 +9,7 @@ declare global {
     export interface Request {
       redis: RedisService;
       user?: User;
+      invalidate_cache?: boolean;
     }
   }
 }

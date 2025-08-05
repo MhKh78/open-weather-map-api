@@ -39,6 +39,7 @@ if (error) {
 
 export const config = {
   rootDir: __dirname,
+  baseCacheKey: "openweather",
   host: envVars.HOST,
   port: envVars.PORT,
   nodeEnv: envVars.NODE_ENV,
