@@ -22,11 +22,16 @@ export function validateDto(
     });
 
     if (errors.length > 0) {
-      return next(errors); // Let globalErrorHandler handle it
+      return res.status(400).json({
+        message: "Validation failed",
+        errors: errors.map((e) => ({
+          field: e.property,
+          constraints: e.constraints,
+        })),
+      });
     }
 
-    // Replace the request section with validated instance
-    req[source] = object;
+    Object.assign(req[source], object);
     next();
   };
 }

@@ -2,10 +2,11 @@ import { cacheRequest } from "@middlewares/cache.middleware";
 import { invalidateCacheMiddleware } from "@middlewares/invalidate-cache.middleware";
 import { validateDto } from "@middlewares/validate-dto.middleware";
 import { getForecastByIdDto } from "@modules/forecast/dto/get-forecast.dto";
-import { getForecastByCityDto } from "@modules/forecast/dto/get-weather-city.dto";
+import { getForecastByCityDto } from "@modules/forecast/dto/get-forecast-city.dto";
 import { ForecastController } from "@modules/forecast/forecast.controller";
 import { getWeatherByCityDto } from "@modules/weather/dto/get-weather-city.dto";
 import { Router, Request } from "express";
+import { GetForecastListDto } from "@modules/forecast/dto/get-forecast-list.dto";
 
 const router = Router();
 const controller = new ForecastController();
@@ -71,7 +72,12 @@ router.get(
  *       200:
  *         description: Paginated forecast list retrieved
  */
-router.get("/", cacheRequest(cacheKey, 600), controller.getAll);
+router.get(
+  "/",
+  validateDto(GetForecastListDto, "params"),
+  cacheRequest(cacheKey, 600),
+  controller.getAll
+);
 
 /**
  * @swagger
