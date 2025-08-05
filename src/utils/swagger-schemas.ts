@@ -112,11 +112,6 @@ export const schemas = {
         format: "float",
         example: 5.2,
       },
-      fetchedAt: {
-        type: "string",
-        format: "date-time",
-        example: "2025-08-04T14:30:00Z",
-      },
     },
   },
 };
