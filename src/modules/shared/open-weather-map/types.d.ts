@@ -9,3 +9,12 @@ export interface WeatherApiResult {
   windSpeed: number;
   fetchedAt: string;
 }
+
+export interface ForecastApiResult {
+  forecastDate: string;
+  temperatureMin: number;
+  temperatureMax: number;
+  description: string;
+  humidity: number;
+  windSpeed: number;
+}
