@@ -23,7 +23,6 @@ services:
       - db
       - redis
     volumes:
-      - .:/app
       - /app/node_modules
     command: sh -c "npm run start"
 
