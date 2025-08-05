@@ -17,6 +17,7 @@ A modular, class-based REST API built with TypeScript, Express, TypeORM, Postgre
 - [🔮 Swagger Docs](#-swagger-docs)
 - [🌐 Docker Usage](#-docker-usage)
 - [🌟 Deployment Notes](#-deployment-notes)
+- [🛢️ Dabase Design](#-database-design)
 - [👨‍💻 Author](#-author)
 
 ---
@@ -147,6 +148,60 @@ You Must Have Postgres UUID extention Enabled
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+```
+
+## 🛢️ Dabase Design
+```mermaid
+erDiagram
+    USER ||--o{ CITY : "createdBy"
+    CITY ||--o{ WEATHER : has
+    CITY ||--o{ FORECAST : has
+
+    USER {
+        uuid id PK
+        string username
+        string password
+        timestamp created_at
+    }
+
+    CITY {
+        uuid id PK
+        string cityName
+        string country
+        float lat
+        float lon
+        uuid created_by FK
+        timestamp createdAt
+        timestamp updatedAt
+        timestamp deletedAt
+    }
+
+    WEATHER {
+        uuid id PK
+        uuid city_id FK
+        float temperature
+        string description
+        int humidity
+        float windSpeed
+        timestamp fetchedAt
+        timestamp createdAt
+        timestamp updatedAt
+        timestamp deletedAt
+    }
+
+    FORECAST {
+        uuid id PK
+        uuid city_id FK
+        date forecastDate
+        float temperatureMin
+        float temperatureMax
+        string description
+        int humidity
+        float windSpeed
+        timestamp createdAt
+        timestamp updatedAt
+        timestamp deletedAt
+    }
 ```
 
 
