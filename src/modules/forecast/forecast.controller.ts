@@ -42,6 +42,10 @@ export class ForecastController {
       const forecasts = await this.service.getOrFetch(cityName);
 
       if (!forecasts || !forecasts.length) {
+        if (!forecasts) {
+          req.invalidate_cache = true;
+        }
+
         throw new ApiError("City or forecast not found", 404);
       }
 
