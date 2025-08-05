@@ -8,31 +8,43 @@ services:
     ports:
       - "8010:8010"
     environment:
+      - HOST=0.0.0.0
       - PORT=8010
       - PGHOST=db
       - DB_PORT=5432
-      - PGUSER=
-      - PGPASSWORD=
-      - PGDATABASE=
+      - PGUSER=weather_user
+      - PGPASSWORD=weather_pass
+      - PGDATABASE=weather_app_api
+      - REDIS_URL=redis://default:@redis:6379
+      - OPEN_WEATHER_MAP_API_KEY=your_api_key_here
+      - JWT_SECRET=your_jwt_secret_here
     depends_on:
       - db
+      - redis
     volumes:
       - .:/app
       - /app/node_modules
-    command: sh -c "npm run migration:run && npm start"
+    command: sh -c "npm run migration:run && npm run start:prod"
 
   db:
     image: postgres:15
     container_name: pg_db
     restart: always
     environment:
-      POSTGRES_USER: 
-      POSTGRES_PASSWORD: 
-      POSTGRES_DB: 
+      POSTGRES_USER: weather_user
+      POSTGRES_PASSWORD: weather_pass
+      POSTGRES_DB: weather_app_api
     ports:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis_cache
+    restart: always
+    ports:
+      - "6379:6379"
 
 volumes:
   pgdata:
