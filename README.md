@@ -128,11 +128,18 @@ Make sure Docker and Docker Compose are installed. (And Also Update Docker Compo
 ```bash
 # Start everything
 docker-compose up --build
+
+# Alternative For Newer Versions
+docker compose up --build
+
 ```
 If You Notice Two Instances Running Use The Command Below, The Try The Command Above
 ```bash
 # Stop and clean
 docker-compose down --volumes --remove-orphans
+
+# Alternative For Newer Versions
+docker compose down --volumes --remove-orphans
 ```
 ### Included Services
 - app - Your Express + TypeScript server
