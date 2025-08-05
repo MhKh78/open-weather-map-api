@@ -44,8 +44,8 @@ src/
 ├── middlewares/ # error, auth, validation, etc.
 ├── routes/ # central route exports
 ├── utils/ # JWT, helpers, etc.
-├── index.ts # app entry point
-└── app.ts # Express app setup
+├── index.ts # Express app setup and app entry point
+└── init-services.ts # Initializing Start up Services
 ```
 
 ---
