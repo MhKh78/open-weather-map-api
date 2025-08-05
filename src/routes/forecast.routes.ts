@@ -44,7 +44,7 @@ router.get(
   validateDto(getForecastByCityDto, "params"),
   cacheRequest(
     (req: Request) => `${baseCacheKey}:city:${req.params.cityName}`,
-    300
+    10
   ),
   controller.getForecast
 );
@@ -75,7 +75,7 @@ router.get(
 router.get(
   "/",
   validateDto(GetForecastListDto, "params"),
-  cacheRequest(cacheKey, 600),
+  cacheRequest(cacheKey, 10),
   controller.getAll
 );
 
@@ -102,7 +102,7 @@ router.get(
 router.get(
   "/:id",
   validateDto(getForecastByIdDto, "params"),
-  cacheRequest((req: Request) => `${baseCacheKey}:id:${req.params.id}`, 300),
+  cacheRequest((req: Request) => `${baseCacheKey}:id:${req.params.id}`, 10),
   controller.getById
 );
 
