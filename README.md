@@ -18,6 +18,7 @@ A modular, class-based REST API built with TypeScript, Express, TypeORM, Postgre
 - [🌐 Docker Usage](#-docker-usage)
 - [🌟 Deployment Notes](#-deployment-notes)
 - [🛢️ Dabase Design](#-database-design)
+- [🔑 Getting OpenWeatherMap API Key](#-getting-openweathermap-api-key)
 - [👨‍💻 Author](#-author)
 
 ---
@@ -211,6 +212,44 @@ erDiagram
     }
 ```
 
+## 🔑 Getting OpenWeatherMap API Key
 
-🧙‍♂️ Author
+✅ Step 1: Create an Account
+Visit https://openweathermap.org/
+
+Click Sign Up (top right)
+
+Fill in your email, password, and username
+
+Confirm your email address through the link sent to your inbox
+
+✅ Step 2: Log In and Access Your Dashboard
+- Go to https://home.openweathermap.org/
+- Log in using your email and password
+- You’ll be redirected to your API keys dashboard
+
+✅ Step 3: Create or Use an API Key
+- A default key is already created: usually called default
+- You can rename it or create a new one
+    - Click "Create key"
+    - Enter a name (e.g., weather-api-backend)
+    - Click Generate
+
+✅ Step 4: Copy the API Key
+- Click "Show" next to the key to reveal it
+- Copy it to your clipboard
+
+✅ Step 5: Add It to Your .env File
+Paste it into your project’s .env file or Docker Compose Envs like this:
+
+```env
+OPENWEATHER_API_KEY=your_actual_api_key_here
+```
+⚠️ Notes
+- The free plan has limits (60 calls/min, 1000 calls/day, 1M/month) — good for dev/test
+- It may take 10–15 minutes for a new key to activate
+- Use HTTPS when calling the API
+
+
+## 🧙‍♂️ Author
 Built and maintained by [MhKh]
