@@ -82,10 +82,7 @@ export class ForecastService {
       })
     );
 
-    const res = await this.forecastRepo.upsert(entities, [
-      "city",
-      "forecastDate",
-    ]);
+    await this.forecastRepo.upsert(entities, ["city", "forecastDate"]);
 
     // Re-fetch with correct fromDate/toDate
     return await this.forecastRepo.find({
