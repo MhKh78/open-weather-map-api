@@ -123,7 +123,7 @@ npm run start
 
 
 ## 🌐 Docker Usage
-Make sure Docker and Docker Compose are installed.
+Make sure Docker and Docker Compose are installed. (And Also Update Docker Compose Enviroment Value (Api Keys) Accordingly)
 
 ```bash
 # Start everything
