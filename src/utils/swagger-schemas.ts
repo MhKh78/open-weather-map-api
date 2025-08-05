@@ -91,4 +91,32 @@ export const schemas = {
       },
     ],
   },
+  updateWeather: {
+    type: "object",
+    properties: {
+      temperature: {
+        type: "number",
+        format: "float",
+        example: 23.5,
+      },
+      description: {
+        type: "string",
+        example: "Light rain",
+      },
+      humidity: {
+        type: "integer",
+        example: 75,
+      },
+      windSpeed: {
+        type: "number",
+        format: "float",
+        example: 5.2,
+      },
+      fetchedAt: {
+        type: "string",
+        format: "date-time",
+        example: "2025-08-04T14:30:00Z",
+      },
+    },
+  },
 };
