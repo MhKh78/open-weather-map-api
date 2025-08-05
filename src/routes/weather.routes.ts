@@ -8,6 +8,7 @@ import { cacheRequest } from "@middlewares/cache.middleware";
 import { UpdateWeatherDto } from "@modules/weather/dto/update-weather.dto";
 import { invalidateCacheMiddleware } from "@middlewares/invalidate-cache.middleware";
 import { getWeatherByCityDto } from "@modules/weather/dto/get-weather-city.dto";
+import { GetWeatherListDto } from "@modules/weather/dto/get-weather-list.dto";
 
 /**
  * @swagger
@@ -89,7 +90,12 @@ router.post(
  *               $ref: '#/components/schemas/listWeatherSuccess'
  */
 
-router.get("/", cacheRequest(cacheKey, 600), controller.getAll);
+router.get(
+  "/",
+  validateDto(GetWeatherListDto, "query"),
+  cacheRequest(cacheKey, 600),
+  controller.getAll
+);
 
 /**
  * @swagger
