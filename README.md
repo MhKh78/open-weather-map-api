@@ -38,13 +38,13 @@ A modular, class-based REST API built with TypeScript, Express, TypeORM, Postgre
 ## 📁 Project Structure
 ```
 src/
-├── config/ # env + Swagger + validation config
 ├── db/ # entities, migrations, subscribers
 ├── modules/ # feature modules (user, weather, etc.)
 ├── middlewares/ # error, auth, validation, etc.
 ├── routes/ # central route exports
-├── utils/ # JWT, helpers, etc.
+├── utils/ # JWT, helpers, Swagger, validation config, etc.
 ├── index.ts # Express app setup and app entry point
+├── config.ts # Enviroment Setup
 └── init-services.ts # Initializing Start up Services
 ```
 
