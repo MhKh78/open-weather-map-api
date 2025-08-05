@@ -7,11 +7,14 @@ import { globalErrorHandler } from "@middlewares/error.middleware";
 import { config } from "@root/config";
 import { redis } from "./init-services";
 import { attachRedis } from "@middlewares/attach-redis.middleware";
+import { apiRateLimiter } from "@middlewares/rate-limit.middleware";
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(attachRedis);
+
+app.use(apiRateLimiter);
 
 // Routes
 app.use("", router);
