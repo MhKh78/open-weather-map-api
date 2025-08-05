@@ -81,8 +81,8 @@ JWT_SECRET=your_jwt_secret
 Development
 ```bash
 # Clone the project
-git clone https://github.com/your-username/weather-api.git
-cd weather-api
+git clone https://github.com/MhKh78/open-weather-map-api
+cd open-weather-map-api
 
 # Install dependencies
 npm install
