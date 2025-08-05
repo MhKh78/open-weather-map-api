@@ -77,4 +77,15 @@ export class RedisService {
     if (!this.isConnected()) throw new Error("Redis is not ready");
     await this.client.del(key);
   }
+
+  async deleteByPattern(baseKey: string): Promise<void> {
+    if (!this.isConnected()) return;
+
+    const pattern = `${baseKey}:*`;
+    const keys = await this.client.keys(pattern);
+
+    if (keys.length > 0) {
+      await this.client.del(...(keys as any));
+    }
+  }
 }
